@@ -36,8 +36,18 @@
     e.preventDefault();
     var f = e.target, msg = document.getElementById('okMsg');
     var em = document.getElementById('email').value.trim();
+    var phone = document.getElementById('phone').value.trim();
+    var startValue = document.getElementById('startDate').value;
+    var endValue = document.getElementById('endDate').value;
     var isEnglish = document.documentElement.lang === 'en';
     if(!em || em.indexOf('@') < 1){ msg.textContent = isEnglish ? 'Enter a valid email address.' : 'Βάλε ένα έγκυρο email.'; return; }
+    if(phone.replace(/\D/g,'').length < 7){ msg.textContent = isEnglish ? 'Enter a valid phone number.' : 'Βάλε ένα έγκυρο τηλέφωνο.'; return; }
+    if(!startValue || !endValue){ msg.textContent = isEnglish ? 'Choose both rental dates.' : 'Επίλεξε και τις δύο ημερομηνίες ενοικίασης.'; return; }
+    var start = new Date(startValue + 'T00:00:00');
+    var end = new Date(endValue + 'T00:00:00');
+    var minimumEnd = new Date(start.getFullYear(), start.getMonth() + 1, start.getDate());
+    if(minimumEnd.getDate() !== start.getDate()) minimumEnd = new Date(start.getFullYear(), start.getMonth() + 2, 0);
+    if(end < minimumEnd){ msg.textContent = isEnglish ? 'The rental request must be for at least one month.' : 'Το αίτημα ενοικίασης πρέπει να είναι για τουλάχιστον έναν μήνα.'; return; }
     msg.textContent = isEnglish ? 'Sending…' : 'Στέλνεται…';
     fetch('/', {
       method: 'POST',
@@ -50,6 +60,24 @@
       msg.textContent = isEnglish ? 'Something went wrong. Call us or send a WhatsApp message.' : 'Κάτι πήγε στραβά. Πάρε μας τηλέφωνο ή στείλε WhatsApp.';
     });
   });
+
+  // rental date calendar: enforce a minimum duration of one calendar month
+  (function(){
+    var startInput = document.getElementById('startDate');
+    var endInput = document.getElementById('endDate');
+    if(!startInput || !endInput) return;
+    var today = new Date();
+    var todayValue = today.toISOString().slice(0,10);
+    startInput.min = todayValue;
+    startInput.addEventListener('change', function(){
+      if(!startInput.value) return;
+      var start = new Date(startInput.value + 'T00:00:00');
+      var minEnd = new Date(start.getFullYear(), start.getMonth() + 1, start.getDate());
+      if(minEnd.getDate() !== start.getDate()) minEnd = new Date(start.getFullYear(), start.getMonth() + 2, 0);
+      endInput.min = minEnd.toISOString().slice(0,10);
+      if(endInput.value && new Date(endInput.value + 'T00:00:00') < minEnd) endInput.value = '';
+    });
+  })();
 
   // scroll reveal
   if(!window.matchMedia('(prefers-reduced-motion:reduce)').matches){

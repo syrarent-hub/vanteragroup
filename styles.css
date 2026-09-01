@@ -268,6 +268,9 @@
     background-position:calc(100% - 22px) 21px,calc(100% - 16px) 21px;
     background-size:6px 6px,6px 6px;background-repeat:no-repeat}
   .form input:focus,.form select:focus{outline:none;border-color:var(--gold)}
+  .form textarea{flex:1 1 100%;min-width:220px;background:var(--ink);border:1px solid var(--line);border-radius:18px;color:#fff;padding:14px 18px;font:inherit;resize:vertical}
+  .form textarea:focus{outline:none;border-color:var(--gold)}
+  .form-hint{width:100%;color:var(--muted);font-size:12px;text-align:center;margin-top:-2px}
   .form select option{background:var(--ink);color:#fff}
   .form .ok{color:var(--gold);font-size:14.5px;width:100%;margin-top:6px;min-height:20px}
   .cta-direct{margin-top:30px}
