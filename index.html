@@ -580,8 +580,10 @@
     <div style="display:flex;justify-content:center;margin-bottom:26px"><svg style="width:56px;height:56px" aria-hidden="true"><use href="#v-emblem"/></svg></div>
     <h2>Ζήτησε προσφορά για μηνιαία ενοικίαση</h2>
     <p>Συμπλήρωσε τα στοιχεία σου και θα επικοινωνήσουμε μαζί σου για τη διαθεσιμότητα.</p>
-    <form class='form' id='waitForm' method='POST' name='leads'>
-      <input type="hidden" name="form-name" value="leads">
+    <form class='form' id='waitForm' method='POST' action="https://formsubmit.co/ajax/syrarent@gmail.com" name='leads'>
+      <input type="hidden" name="_subject" value="Νέο αίτημα μηνιαίας ενοικίασης Vantera">
+      <input type="hidden" name="_template" value="table">
+      <input type="hidden" name="_captcha" value="false">
       <p style="display:none"><label>Μην συμπληρώσετε: <input name="company"></label></p>
       <label for="email" class="sr-only">Email</label>
       <input type="email" id="email" name="email" placeholder="Το email σου" required autocomplete="email">

@@ -49,10 +49,13 @@
     if(minimumEnd.getDate() !== start.getDate()) minimumEnd = new Date(start.getFullYear(), start.getMonth() + 2, 0);
     if(end < minimumEnd){ msg.textContent = isEnglish ? 'The rental request must be for at least one month.' : 'Το αίτημα ενοικίασης πρέπει να είναι για τουλάχιστον έναν μήνα.'; return; }
     msg.textContent = isEnglish ? 'Sending…' : 'Στέλνεται…';
-    fetch('/', {
+    fetch(f.action, {
       method: 'POST',
-      headers: {'Content-Type': 'application/x-www-form-urlencoded'},
+      headers: {'Content-Type': 'application/x-www-form-urlencoded', 'Accept': 'application/json'},
       body: new URLSearchParams(new FormData(f)).toString()
+    }).then(function(response){
+      if(!response.ok) throw new Error('Form submission failed');
+      return response.json();
     }).then(function(){
       msg.textContent = isEnglish ? 'Thank you — we will send you a quote.' : 'Ευχαριστούμε — θα σου στείλουμε προσφορά.';
       f.reset();
