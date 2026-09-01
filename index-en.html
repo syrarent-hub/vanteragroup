@@ -590,9 +590,9 @@
       <label for="phone" class="sr-only">Phone</label>
       <input type="tel" id="phone" name="phone" placeholder="Phone" required autocomplete="tel">
       <label for="startDate" class="sr-only">Rental start date</label>
-      <input type="date" id="startDate" name="start_date" required aria-label="Rental start date">
+      <input type="text" id="startDate" name="start_date" placeholder="Day/Month/Year" required aria-label="Rental start date" autocomplete="off">
       <label for="endDate" class="sr-only">Rental end date</label>
-      <input type="date" id="endDate" name="end_date" required aria-label="Rental end date">
+      <input type="text" id="endDate" name="end_date" placeholder="Day/Month/Year" required aria-label="Rental end date" autocomplete="off">
       <div class="form-hint">Minimum rental period: 1 month · This request is not an automatic booking.</div>
       <label for="car" class="sr-only">Car</label>
       <select id="car" name="car" aria-label="Car you are interested in">
@@ -668,6 +668,9 @@
   </svg>
 </a>
 
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
+<script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
+<script src="https://cdn.jsdelivr.net/npm/flatpickr/dist/l10n/gr.js"></script>
 <script src="script.js"></script>
 </body>
 </html>

@@ -68,17 +68,16 @@
   (function(){
     var startInput = document.getElementById('startDate');
     var endInput = document.getElementById('endDate');
-    if(!startInput || !endInput) return;
-    var today = new Date();
-    var todayValue = today.toISOString().slice(0,10);
-    startInput.min = todayValue;
-    startInput.addEventListener('change', function(){
-      if(!startInput.value) return;
-      var start = new Date(startInput.value + 'T00:00:00');
+    if(!startInput || !endInput || typeof flatpickr !== 'function') return;
+    var startPicker = flatpickr(startInput, {dateFormat:'Y-m-d', altInput:true, altFormat:'d/m/Y', minDate:'today', locale:'gr'});
+    var endPicker = flatpickr(endInput, {dateFormat:'Y-m-d', altInput:true, altFormat:'d/m/Y', locale:'gr'});
+    startPicker.config.onChange.push(function(selectedDates){
+      if(!selectedDates.length) return;
+      var start = selectedDates[0];
       var minEnd = new Date(start.getFullYear(), start.getMonth() + 1, start.getDate());
       if(minEnd.getDate() !== start.getDate()) minEnd = new Date(start.getFullYear(), start.getMonth() + 2, 0);
-      endInput.min = minEnd.toISOString().slice(0,10);
-      if(endInput.value && new Date(endInput.value + 'T00:00:00') < minEnd) endInput.value = '';
+      endPicker.set('minDate', minEnd);
+      if(endPicker.selectedDates[0] && endPicker.selectedDates[0] < minEnd) endPicker.clear();
     });
   })();
 

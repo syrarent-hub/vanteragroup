@@ -590,9 +590,9 @@
       <label for="phone" class="sr-only">Τηλέφωνο</label>
       <input type="tel" id="phone" name="phone" placeholder="Τηλέφωνο" required autocomplete="tel">
       <label for="startDate" class="sr-only">Έναρξη ενοικίασης</label>
-      <input type="date" id="startDate" name="start_date" required aria-label="Έναρξη ενοικίασης">
+      <input type="text" id="startDate" name="start_date" placeholder="Ημέρα/Μήνας/Έτος" required aria-label="Έναρξη ενοικίασης" autocomplete="off">
       <label for="endDate" class="sr-only">Λήξη ενοικίασης</label>
-      <input type="date" id="endDate" name="end_date" required aria-label="Λήξη ενοικίασης">
+      <input type="text" id="endDate" name="end_date" placeholder="Ημέρα/Μήνας/Έτος" required aria-label="Λήξη ενοικίασης" autocomplete="off">
       <div class="form-hint">Ελάχιστη διάρκεια: 1 μήνας · Το αίτημα δεν αποτελεί αυτόματη κράτηση.</div>
       <label for="car" class="sr-only">Αυτοκίνητο</label>
       <select id="car" name="car" aria-label="Αυτοκίνητο που σε ενδιαφέρει">
@@ -668,6 +668,9 @@
   </svg>
 </a>
 
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
+<script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
+<script src="https://cdn.jsdelivr.net/npm/flatpickr/dist/l10n/gr.js"></script>
 <script src="script.js"></script>
 </body>
 </html>
